@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import Navbar from "./components/navbar";
 import { useState } from "react";
@@ -22,8 +22,17 @@ const page = () => {
         <main>
           <div className="wrapper flex justify-center w-2/5 mx-auto flex-col">
             <div className="mycrypto flex justify-between gap-10 border-2 border-white rounded-2xl h-28 px-6 py-6">
-              <span>Number of Crypto Coins Type</span>
-              <span>Total number of Crypto Coins</span>
+              <div className="cryptoowned flex flex-col items-center">
+                <span>Number of Crypto Coins Type</span>
+                <ul className="">
+                  {userCoins.map((coin) => (
+                    <li key={coin.id}>{coin.amount}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="totalcrypto flex flex-col items-center">
+                <span>Total number of Crypto Coins</span>
+              </div>
             </div>
             <div className="feed-wrapper mt-10">
               <h1>Crypto Coins</h1>
