@@ -1,14 +1,41 @@
+'use client';
 import React from "react";
 import Navbar from "./components/navbar";
+import { useState } from "react";
+
+interface Coin {
+  id: number;
+  name: string;
+  amount: number;
+}
 
 const page = () => {
+  const [userCoins, setUserCoins] = useState<Coin[]>([
+    { id: 1, name: "Bitcoin", amount: 8 },
+    { id: 2, name: "Ethereum", amount: 2 },
+  ]);
   return (
     <>
-      <Navbar />
+      <div className="flex flex-col h-screen">
+        <Navbar />
 
-      <footer className="w-full mx-auto flex justify-center">
-        <span>&#169; copyright</span>
-      </footer>
+        <main>
+          <div className="wrapper flex justify-center w-2/5 mx-auto flex-col">
+            <div className="mycrypto flex justify-between gap-10 border-2 border-white rounded-2xl h-28 px-6 py-6">
+              <span>Number of Crypto Coins Type</span>
+              <span>Total number of Crypto Coins</span>
+            </div>
+            <div className="feed-wrapper mt-10">
+              <h1>Crypto Coins</h1>
+              <div className="feeds"></div>
+            </div>
+          </div>
+        </main>
+
+        <footer className="w-full mt-auto flex justify-center">
+          <span>&#169; copyright</span>
+        </footer>
+      </div>
     </>
   );
 };
