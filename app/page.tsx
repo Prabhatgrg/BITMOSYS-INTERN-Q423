@@ -14,6 +14,7 @@ const page = () => {
     { id: 1, name: "Bitcoin", amount: 8 },
     { id: 2, name: "Ethereum", amount: 2 },
   ]);
+  const totalCoins = userCoins.reduce((total, coin) => total + coin.amount, 0);
   return (
     <>
       <div className="flex flex-col h-screen">
@@ -31,7 +32,10 @@ const page = () => {
                 </ul>
               </div>
               <div className="totalcrypto flex flex-col items-center">
-                <span>Total number of Crypto Coins</span>
+                <span>Total number of Crypto Coins: </span>
+                <ul>
+                  <li>{ totalCoins }</li>
+                </ul>
               </div>
             </div>
             <div className="feed-wrapper mt-10">
