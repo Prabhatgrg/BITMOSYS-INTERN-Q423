@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Navbar from "./components/navbar";
+import Image from "next/image";
 import { useState } from "react";
 
 interface Coin {
@@ -25,22 +26,184 @@ const page = () => {
             <div className="mycrypto flex justify-between gap-10 border-2 border-white rounded-2xl h-28 px-6 py-6">
               <div className="cryptoowned flex flex-col items-center">
                 <span>Number of Crypto Coins Type</span>
-                <ul className="">
-                  {userCoins.map((coin) => (
+                <ul className="mt-3">
+                  {/* {userCoins.map((coin) => (
                     <li key={coin.id}>{coin.amount}</li>
-                  ))}
+                  ))} */}
+                  <li>{userCoins.length}</li>
                 </ul>
               </div>
               <div className="totalcrypto flex flex-col items-center">
                 <span>Total number of Crypto Coins: </span>
-                <ul>
-                  <li>{ totalCoins }</li>
+                <ul className="mt-3">
+                  <li>{totalCoins}</li>
                 </ul>
               </div>
             </div>
             <div className="feed-wrapper mt-10">
               <h1>Crypto Coins</h1>
-              <div className="feeds"></div>
+              <div className="feeds flex flex-col gap-10 mt-4 mb-4">
+                <div className="bitcoin-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="bitcoin flex items-center gap-4">
+                    <Image
+                      src="/btc.svg"
+                      alt="Bitcoin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>Bitcoin</span>
+                  </div>
+                  <div className="bitcoin-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="ethereum-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="ethereum flex items-center gap-4">
+                    <Image
+                      src="/eth.svg"
+                      alt="Ethereum"
+                      width={50}
+                      height={20}
+                    />
+                    <span>Ethereum</span>
+                  </div>
+                  <div className="ethereum-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="doge-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="doge flex items-center gap-4">
+                    <Image
+                      src="/doge.svg"
+                      alt="Doge Coin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>Doge</span>
+                  </div>
+                  <div className="doge-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="shiba-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="shiba flex items-center gap-4">
+                    <Image
+                      src="/shiba.svg"
+                      alt="Shiba Inu"
+                      width={60}
+                      height={60}
+                    />
+                    <span>Shiba Inu</span>
+                  </div>
+                  <div className="shiba-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="bnb-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="bnb flex items-center gap-4">
+                    <Image
+                      src="/bnb.svg"
+                      alt="BNB Coin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>BNB</span>
+                  </div>
+                  <div className="bnb-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="solana-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="solana flex items-center gap-4">
+                    <Image
+                      src="/solana.svg"
+                      alt="Solana Coin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>Solana</span>
+                  </div>
+                  <div className="solana-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="cardano-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="cardano flex items-center gap-4">
+                    <Image
+                      src="/cardano.svg"
+                      alt="Cardano Coin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>Cardano (ADA)</span>
+                  </div>
+                  <div className="cardano-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="tether-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="tether flex items-center gap-4">
+                    <Image
+                      src="/tether.svg"
+                      alt="Tether Coin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>Tether</span>
+                  </div>
+                  <div className="tether-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="usd-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="usd flex items-center gap-4">
+                    <Image
+                      src="/usd.svg"
+                      alt="USD Coin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>USD</span>
+                  </div>
+                  <div className="usd-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+                <div className="xrp-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
+                  <div className="xrp flex items-center gap-4">
+                    <Image
+                      src="/xrp.svg"
+                      alt="XRP Coin"
+                      width={60}
+                      height={60}
+                    />
+                    <span>XRP</span>
+                  </div>
+                  <div className="xrp-exchange">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Exchange
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </main>
