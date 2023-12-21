@@ -2,6 +2,10 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "../components/navbar";
 
+interface CryptoCoins{
+  name: string;
+}
+
 const Crypto = () => {
   return (
     <>

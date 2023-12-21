@@ -5,28 +5,27 @@ import Image from "next/image";
 import { useState } from "react";
 
 interface Coin {
-  id: number;
   name: string;
   amount: number;
 }
 
 const page = () => {
   const [userCoins, setUserCoins] = useState<Coin[]>([
-    { id: 1, name: "Bitcoin", amount: 8 },
-    { id: 2, name: "Ethereum", amount: 2 },
+    { name: "Bitcoin", amount: 8 },
+    { name: "Ethereum", amount: 2 },
   ]);
   const totalCoins = userCoins.reduce((total, coin) => total + coin.amount, 0);
   return (
     <>
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col bg-main">
         <Navbar />
 
         <main>
-          <div className="wrapper flex justify-center w-2/5 mx-auto flex-col">
-            <div className="mycrypto flex justify-between gap-10 border-2 border-white rounded-2xl h-28 px-6 py-6">
+          <div className="wrapper mt-10 flex justify-center w-3/4 mx-auto flex-col">
+            <div className="mycrypto flex justify-between gap-10 border-2 border-white rounded-2xl h-28 px-6 py-5">
               <div className="cryptoowned flex flex-col items-center">
-                <span>Number of Crypto Coins Type</span>
-                <ul className="mt-3">
+                <span className="text-xl font-bold">Number of Crypto Coins Type</span>
+                <ul className="mt-3 text-2xl font-bold">
                   {/* {userCoins.map((coin) => (
                     <li key={coin.id}>{coin.amount}</li>
                   ))} */}
@@ -34,8 +33,8 @@ const page = () => {
                 </ul>
               </div>
               <div className="totalcrypto flex flex-col items-center">
-                <span>Total number of Crypto Coins: </span>
-                <ul className="mt-3">
+                <span className="text-xl font-bold">Total number of Crypto Coins </span>
+                <ul className="mt-3 text-2xl font-bold">
                   <li>{totalCoins}</li>
                 </ul>
               </div>
