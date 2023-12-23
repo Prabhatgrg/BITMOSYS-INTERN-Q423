@@ -1,13 +1,16 @@
-import React from "react";
+'use client'
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
+import BuyModal from "../components/BuyModel";
 
 const cryptoCoins = [
   { id: 1, name: "Bitcoin", image: "btc.svg" },
   { id: 2, name: "Ethereum", image: "eth.svg" },
   { id: 3, name: "Doge", image: "doge.svg" },
   { id: 4, name: "Shiba Inu", image: "shiba.svg" },
-  { id: 5, name: "BNB", image: "bng.svg" },
+  { id: 5, name: "BNB", image: "bnb.svg" },
   { id: 6, name: "Solana", image: "solana.svg" },
   { id: 7, name: "Cardano (ADA)", image: "cardano.svg" },
   { id: 8, name: "Tether", image: "tether.svg" },
@@ -16,6 +19,26 @@ const cryptoCoins = [
 ];
 
 const Crypto = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
+
+  const handleBuyClick = (coinName: string) => {
+    setSelectedCoin(coinName);
+    setShowModal(true);
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedCoin(null);
+  }
+
+  const handleBuy = (amount: string) => {
+    console.log(`Bought ${selectedCoin} of amount ${amount}`);
+
+    // To close the modal after buying coin
+    handleCloseModal();
+  }
+
   return (
     <>
       <div className="flex flex-col h-screen">
@@ -43,7 +66,7 @@ const Crypto = () => {
                       <span>{coin.name}</span>
                     </div>
                     <div className={`${coin.name.toLowerCase()}-buy`}>
-                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 rounded-full">
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 rounded-full" onClick={() => handleBuyClick(coin.name)}>
                         Buy
                       </button>
                     </div>
@@ -228,6 +251,13 @@ const Crypto = () => {
           <span>&#169; copyright</span>
         </footer>
       </div>
+
+      <BuyModal 
+        coinName={selectedCoin || ''}
+        showModal={showModal}
+        onClose={handleCloseModal}
+        onBuy={handleBuy}
+      />
     </>
   );
 };

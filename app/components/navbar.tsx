@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <div className="wrapper flex content-center p-6 bg-navbar shadow-md shadow-white">
+        <div className="wrapper flex content-center z-50 p-6 bg-navbar shadow-md shadow-white">
           <div className="Logo mr-10">
             <Link href="/">XYZ Crypto</Link>
           </div>
