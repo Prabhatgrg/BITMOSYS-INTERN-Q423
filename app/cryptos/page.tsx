@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 
 const cryptoCoins = [
   { id: 1, name: "Bitcoin", image: "btc.svg" },
