@@ -23,7 +23,7 @@ const page = () => {
 
         <main>
           <div className="wrapper mt-10 flex justify-center w-3/4 mx-auto flex-col">
-            <div className="mycrypto flex justify-between gap-10 border-2 border-white rounded-2xl h-28 px-6 py-5">
+            <div className="container mx-auto flex justify-between items-center gap-10 border-2 border-white px-6 py-3 rounded-xl">
               <div className="cryptoowned flex flex-col items-center">
                 <span className="text-xl font-bold">Number of Crypto Coins Type</span>
                 <ul className="mt-3 text-2xl font-bold">
@@ -41,7 +41,7 @@ const page = () => {
               </div>
             </div>
             <div className="feed-wrapper mt-10">
-              <h1>Crypto Coins</h1>
+              <h1 className="font-bold text-lg">Your Cryptos</h1>
               <div className="feeds flex flex-col gap-10 mt-4 mb-4">
                 <div className="bitcoin-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6">
                   <div className="bitcoin flex items-center gap-4">
