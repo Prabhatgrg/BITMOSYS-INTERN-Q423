@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import BuyModal from "../components/BuyModel";
+import { useUserCoins } from "../context/userCoins";
 
 const cryptoCoins = [
   { id: 1, name: "Bitcoin", image: "btc.svg" },

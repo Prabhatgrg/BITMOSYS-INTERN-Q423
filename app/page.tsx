@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Image from "next/image";
 import { useState } from "react";
+import { useUserCoins } from "./context/userCoins";
 
 interface Coin {
   name: string;
