@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -22,12 +22,6 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [amount, setAmount] = useState<number | null>(null);
   const { boughtCoins } = useUserCoins(); // Use useUserCoins hook
-
-  useEffect(() => {
-    if (isOpen) {
-      setAmount(null);
-    }
-  }, [isOpen]);
 
   return (
     <>
@@ -58,8 +52,10 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
                 <Button
                   color="primary"
                   onClick={() => {
-                    boughtCoins(coin.name, amount!); // Call boughtCoins function
-                    onClose();
+                    if(amount!==null){
+                      boughtCoins(coin.name, amount);
+                      onClose();
+                    }
                   }}
                 >
                   Buy

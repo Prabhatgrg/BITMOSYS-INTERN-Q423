@@ -39,6 +39,7 @@ const Page = () => {
             <div className="feed-wrapper mt-10">
               <h1 className="font-bold text-lg">Your Cryptos</h1>
               <div className="feeds flex flex-col gap-10 mt-4 mb-4">
+                
                 {userCoins.map((coin) => (
                   <div
                     // key={coin.id}
