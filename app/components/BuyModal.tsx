@@ -1,4 +1,3 @@
-// BuyModal.tsx
 import React, { useState, useEffect } from "react";
 import {
   Modal,
@@ -10,28 +9,29 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-// import Crypto from "../cryptos/page";
+import { useUserCoins } from "../context/userCoins"; // Import useUserCoins
 
 interface BuyModalProps {
   coin: {
     name: string;
-    amount: number;
+    // amount: number;
   };
 }
 
 const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number | null>(null);
+  const { boughtCoins } = useUserCoins(); // Use useUserCoins hook
 
   useEffect(() => {
     if (isOpen) {
-      setAmount(0);
+      setAmount(null);
     }
   }, [isOpen]);
 
   return (
     <>
-      <Button onPress={onOpen} color="primary">
+      <Button onClick={onOpen} color="primary"> {/* Fix onClick prop */}
         Buy
       </Button>
       <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} className="bg-dark">
@@ -47,19 +47,18 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
                   label="amount"
                   placeholder="Enter Amount"
                   labelPlacement="outside"
-                  value={amount.toString()}
+                  value={amount !== null ? amount.toString() : ''}
                   onChange={(e) => setAmount(parseFloat(e.target.value))}
                 />
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button color="danger" variant="light" onClick={onClose}> {/* Fix onClick prop */}
                   Close
                 </Button>
                 <Button
                   color="primary"
-                  onPress={() => {
-                    // Handle the buy logic here
-                    console.log(`Bought ${amount} of ${coin.name}`);
+                  onClick={() => {
+                    boughtCoins(coin.name, amount!); // Call boughtCoins function
                     onClose();
                   }}
                 >

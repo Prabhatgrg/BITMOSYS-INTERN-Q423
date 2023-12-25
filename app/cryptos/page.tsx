@@ -27,15 +27,15 @@ const Crypto = () => {
     { id: 10, name: "XRP", image: "xrp.svg" },
   ];
 
-  const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
+  // const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
 
-  const handleBuyClick = (coinName: string) => {
-    setSelectedCoin(coinName);
-  };
+  // const handleBuyClick = (coinName: string) => {
+  //   setSelectedCoin(coinName);
+  // };
 
   return (
     <>
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col bg-dark h-full">
         <Navbar />
 
         <main>
