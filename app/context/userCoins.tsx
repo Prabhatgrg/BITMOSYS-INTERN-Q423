@@ -1,15 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-
-interface CryptoCoin {
-  name: string;
-  amount: number;
-}
+import Coins, { CryptoCoin } from "../coins/Coins";
 
 interface UserCoinsContextProps {
   userCoins: CryptoCoin[];
-  boughtCoins: (name: string, amount: number) => void;
+  boughtCoins: (name: string, amount: number, image: string) => void;
 }
 
 const UserCoinsContext = createContext<UserCoinsContextProps | undefined>(
@@ -39,7 +35,7 @@ export const UserCoinsProvider = ({ children }) => {
     }
   }, [userCoins]);
 
-  const boughtCoins = async (name: string, amount: number) => {
+  const boughtCoins = async (name: string, amount: number, image: string) => {
     //Check if the coin with the given name is already in userCoins
     const existingCoin = userCoins.find((coin) => coin.name === name);
     if (existingCoin) {
@@ -51,7 +47,7 @@ export const UserCoinsProvider = ({ children }) => {
       );
     } else {
       //If the coin does not exist then add it to the userCoins array
-      setUserCoins((prevOwnedCoins) => [...prevOwnedCoins, { name, amount }]);
+      setUserCoins((prevOwnedCoins) => [...prevOwnedCoins, { name, amount, image } as CryptoCoin]);
     }
   };
 

@@ -1,38 +1,12 @@
-// crypto.tsx
 'use client';
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import Navbar from "../components/Navbar";
 import BuyModal from "../components/BuyModal";
-import { useUserCoins } from "../context/userCoins";
-
-interface CryptoCoin {
-  id: number;
-  name: string;
-  image: string;
-}
+import Coins, { CryptoCoin } from "../coins/Coins";
 
 const Crypto = () => {
-  const cryptoCoins: CryptoCoin[] = [
-    { id: 1, name: "Bitcoin", image: "btc.svg" },
-    { id: 2, name: "Ethereum", image: "eth.svg" },
-    { id: 3, name: "Doge", image: "doge.svg" },
-    { id: 4, name: "Shiba Inu", image: "shiba.svg" },
-    { id: 5, name: "BNB", image: "bnb.svg" },
-    { id: 6, name: "Solana", image: "solana.svg" },
-    { id: 7, name: "Cardano (ADA)", image: "cardano.svg" },
-    { id: 8, name: "Tether", image: "tether.svg" },
-    { id: 9, name: "USD", image: "usd.svg" },
-    { id: 10, name: "XRP", image: "xrp.svg" },
-  ];
-
-  // const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
-
-  // const handleBuyClick = (coinName: string) => {
-  //   setSelectedCoin(coinName);
-  // };
-
+  const cryptoCoins: CryptoCoin[] = Coins;
   return (
     <>
       <div className="flex flex-col bg-dark h-full">
@@ -51,7 +25,7 @@ const Crypto = () => {
                     <div
                       className={`${coin.name.toLowerCase()} flex items-center gap-4`}
                     >
-                      <Image
+                      <img
                         src={`/${coin.image}`}
                         alt={coin.name}
                         width={coin.name === "Ethereum" ? 50 : 60}

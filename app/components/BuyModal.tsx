@@ -9,11 +9,12 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import { useUserCoins } from "../context/userCoins"; // Import useUserCoins
+import { useUserCoins } from "../context/userCoins";
 
 interface BuyModalProps {
   coin: {
     name: string;
+    image: string;
     // amount: number;
   };
 }
@@ -21,11 +22,11 @@ interface BuyModalProps {
 const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [amount, setAmount] = useState<number | null>(null);
-  const { boughtCoins } = useUserCoins(); // Use useUserCoins hook
+  const { boughtCoins } = useUserCoins();
 
   return (
     <>
-      <Button onClick={onOpen} color="primary"> {/* Fix onClick prop */}
+      <Button onClick={onOpen} color="primary">
         Buy
       </Button>
       <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} className="bg-dark">
@@ -46,14 +47,14 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
                 />
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onClick={onClose}> {/* Fix onClick prop */}
+                <Button color="danger" variant="light" onClick={onClose}>
                   Close
                 </Button>
                 <Button
                   color="primary"
                   onClick={() => {
                     if(amount!==null){
-                      boughtCoins(coin.name, amount);
+                      boughtCoins(coin.name, amount, coin.image);
                       onClose();
                     }
                   }}
