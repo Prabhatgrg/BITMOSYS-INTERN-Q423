@@ -6,6 +6,7 @@ import Coins, { CryptoCoin } from "../coins/Coins";
 interface UserCoinsContextProps {
   userCoins: CryptoCoin[];
   boughtCoins: (name: string, amount: number, image: string) => void;
+  exchangeCoins: (sourceCoin: string, targetCoin: string, amount: number, image: string) => void;
 }
 
 const UserCoinsContext = createContext<UserCoinsContextProps | undefined>(
@@ -37,8 +38,8 @@ export const UserCoinsProvider = ({ children }) => {
 
   const boughtCoins = async (name: string, amount: number, image: string) => {
     //Check if the coin with the given name is already in userCoins
-    const existingCoin = userCoins.find((coin) => coin.name === name);
-    if (existingCoin) {
+    const coinExists = userCoins.find((coin) => coin.name === name);
+    if (coinExists) {
       //If the coin already exists, then only update the amount
       setUserCoins((prevOwnedCoins) =>
         prevOwnedCoins.map((coin) =>
@@ -51,7 +52,28 @@ export const UserCoinsProvider = ({ children }) => {
     }
   };
 
-  const contextValue: UserCoinsContextProps = { userCoins, boughtCoins };
+  const exchangeCoins = async (sourceCoin: string, targetCoin: string, amount: number, image: string) => {
+    const sourceCoinIndex = userCoins.findIndex((coin) => coin.name === targetCoin);
+    if(sourceCoinIndex !== -1 && amount > 0){
+      const sourceCoinAmount = userCoins[sourceCoinIndex].amount;
+
+      //To check if user have enough coin
+      if(sourceCoinAmount >= amount){
+        const updatedUserCoin = [...userCoins];
+
+        //To Check if targetCoin is already owned
+        const targetCoinIndex = updatedUserCoin.findIndex((coin) => coin.name === targetCoin);
+        if(targetCoinIndex !== -1){
+          updatedUserCoin[targetCoinIndex] = {
+            ...updatedUserCoin[targetCoinIndex],
+            amount: updatedUserCoin[targetCoinIndex].amount + amount,
+          };
+        }
+      }
+    }
+  }
+
+  const contextValue: UserCoinsContextProps = { userCoins, boughtCoins, exchangeCoins };
 
   return (
     <UserCoinsContext.Provider value={contextValue}>

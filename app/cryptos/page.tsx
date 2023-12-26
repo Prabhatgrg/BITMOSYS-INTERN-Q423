@@ -7,9 +7,10 @@ import Coins, { CryptoCoin } from "../coins/Coins";
 
 const Crypto = () => {
   const cryptoCoins: CryptoCoin[] = Coins;
+  // console.log(cryptoCoins);
   return (
     <>
-      <div className="flex flex-col bg-dark h-full">
+      <div className="flex flex-col bg-main h-full text-white">
         <Navbar />
 
         <main>
@@ -26,7 +27,7 @@ const Crypto = () => {
                       className={`${coin.name.toLowerCase()} flex items-center gap-4`}
                     >
                       <img
-                        src={`/${coin.image}`}
+                        src={`${coin.image}`}
                         alt={coin.name}
                         width={coin.name === "Ethereum" ? 50 : 60}
                         height={coin.name === "Ethereum" ? 20 : 60}

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Navbar from "./components/Navbar";
+import ExchangeModal from "./components/ExchangeModal";
 import { useUserCoins } from "./context/userCoins";
 
 const Page = () => {
@@ -10,7 +11,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-col bg-main h-screen overflow-y-scroll">
+      <div className="flex flex-col bg-main h-screen overflow-y-scroll text-white">
         <Navbar />
 
         <main>
@@ -46,15 +47,15 @@ const Page = () => {
                         className={`${coin.name.toLowerCase()} flex items-center gap-4`}
                       >
                         <img
-                          src={`/${coin.image}`}
+                          src={`${coin.image}`}
                           alt={coin.name}
-                          width={coin.name === "Ethereum" ? 50 : 60}
-                          height={coin.name === "Ethereum" ? 20 : 60}
+                          width={25}
                           />
 
                         <span>{coin.name}</span>
-                        <span>{coin.amount}</span>
+                        <span>Owned: {coin.amount}</span>
                       </div>
+                      <ExchangeModal coin={coin}/>
                     </div>
                   ))
                 ) : (
@@ -68,7 +69,7 @@ const Page = () => {
         </main>
 
         <footer className="w-full mt-auto flex justify-center">
-          <span>&#169; copyright</span>
+          <span>CryptoHub 2023 &#169; copyright</span>
         </footer>
       </div>
     </>

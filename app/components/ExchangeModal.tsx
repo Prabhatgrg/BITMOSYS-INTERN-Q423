@@ -8,25 +8,29 @@ import {
   Input,
   Button,
   useDisclosure,
+  Select,
+  SelectItem,
+  Avatar,
 } from "@nextui-org/react";
 import { useUserCoins } from "../context/userCoins";
 
-interface BuyModalProps {
+interface ExchangeModalProps {
   coin: {
     name: string;
+    amount: number;
     image: string;
   };
 }
 
-const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
+const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [amount, setAmount] = useState<number | null>(null);
-  const { boughtCoins } = useUserCoins();
+  const { userCoins, boughtCoins } = useUserCoins();
 
   return (
     <>
       <Button onClick={onOpen} color="primary">
-        Buy
+        Exchange
       </Button>
       <Modal
         backdrop="blur"
@@ -37,13 +41,33 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Buy {coin.name}
+              <ModalHeader className="flex flex-col gap-1 text-white">
+                Exchange {coin.name} with
               </ModalHeader>
               <ModalBody>
+                <Select
+                  label="Select Coin"
+                  className="max-w-xs"
+                  placeholder="Select Coin"
+                  color="primary"
+                >
+                  {userCoins.map((coin) => (
+                    <SelectItem
+                      key={coin.name}
+                      startContent={
+                        <Avatar
+                          alt={coin.name}
+                          className="w-6 h-6 text-dark"
+                          src={`${coin.image}`}
+                        />
+                      }
+                    >
+                      {coin.name}
+                    </SelectItem>
+                  ))}
+                </Select>
                 <Input
                   type="number"
-                  label="amount"
                   placeholder="Enter Amount"
                   labelPlacement="outside"
                   value={amount !== null ? amount.toString() : ""}
@@ -57,16 +81,13 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
                 <Button
                   color="primary"
                   onClick={() => {
-                    if (amount === null || amount <= 0) {
-                      alert("Error: Amount needs to be greater than 0");
-                    } else {
+                    if (amount !== null) {
                       boughtCoins(coin.name, amount, coin.image);
                       onClose();
-                      alert("Bought "+ coin.name + " of amount " + amount);
                     }
                   }}
                 >
-                  Buy
+                  Exchange
                 </Button>
               </ModalFooter>
             </>
@@ -77,4 +98,4 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
   );
 };
 
-export default BuyModal;
+export default ExchangeModal;
