@@ -39,6 +39,7 @@ export const UserCoinsProvider = ({ children }) => {
   const boughtCoins = async (name: string, amount: number, image: string) => {
     //Check if the coin with the given name is already in userCoins
     const coinExists = userCoins.find((coin) => coin.name === name);
+    
     if (coinExists) {
       //If the coin already exists, then only update the amount
       setUserCoins((prevOwnedCoins) =>
