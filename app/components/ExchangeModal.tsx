@@ -13,6 +13,7 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import { useUserCoins } from "../context/userCoins";
+import Coins, { CryptoCoin } from "../coins/Coins";
 
 interface ExchangeModalProps {
   coin: {
@@ -25,7 +26,8 @@ interface ExchangeModalProps {
 const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [amount, setAmount] = useState<number | null>(null);
-  const { userCoins, boughtCoins } = useUserCoins();
+  const { userCoins, exchangeCoins } = useUserCoins();
+  const coinList: CryptoCoin[] = Coins;
 
   return (
     <>
@@ -48,10 +50,10 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                 <Select
                   label="Select Coin"
                   className="max-w-xs"
-                  placeholder="Select Coin"
+                  // placeholder="Select Coin"
                   color="primary"
                 >
-                  {userCoins.map((coin) => (
+                  {coinList.map((coin) => (
                     <SelectItem
                       key={coin.name}
                       startContent={
@@ -82,7 +84,7 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                   color="primary"
                   onClick={() => {
                     if (amount !== null) {
-                      boughtCoins(coin.name, amount, coin.image);
+                      // exchangeCoins(coin.name, amount, coin.image);
                       onClose();
                     }
                   }}

@@ -32,7 +32,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
         backdrop="blur"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        className="bg-dark"
+        className="bg-black text-white"
       >
         <ModalContent>
           {(onClose) => (
@@ -43,9 +43,9 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
               <ModalBody>
                 <Input
                   type="number"
-                  label="amount"
                   placeholder="Enter Amount"
                   labelPlacement="outside"
+                  className="text-white"
                   value={amount !== null ? amount.toString() : ""}
                   onChange={(e) => setAmount(parseFloat(e.target.value))}
                 />
@@ -62,7 +62,6 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
                     } else {
                       boughtCoins(coin.name, amount, coin.image);
                       onClose();
-                      alert("Bought "+ coin.name + " of amount " + amount);
                     }
                   }}
                 >
