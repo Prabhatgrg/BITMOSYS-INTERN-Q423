@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -25,33 +25,35 @@ interface ExchangeModalProps {
 
 const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [amount, setAmount] = useState<number | null>(null);
-  const [sourceCoin, setSourceCoin] = useState<string | null>(null);
-  const [targetCoin, setTargetCoin] = useState<string | null>(null);
-  const [targetCoinImage, setTargetCoinImage] = useState<string | null>(null);
+  const [amount, setAmount] = useState<number>(0);
+  const [sourceCoin, setSourceCoin] = useState<string>("");
+  const [targetCoin, setTargetCoin] = useState<string>("");
+  const [targetCoinImage, setTargetCoinImage] = useState<string>("");
   const { userCoins, exchangeCoins } = useUserCoins();
   const coinList: CryptoCoin[] = Coins;
 
-  const handleOpenModal = () => {
-    setSourceCoin(coin.name);
-    onOpen();
-  };
+  // useEffect(() => {
+  //   console.log("Source Coin updated: ", sourceCoin);
+  //   console.log("Target Coin updated: ", targetCoin);
+  //   console.log("Target Coin Image updated: ", targetCoinImage);
+  // }, [sourceCoin, targetCoin, targetCoinImage]);
 
-  const handleSelectTargetCoin = (selectedCoin: CryptoCoin) => {
-    setTargetCoin(selectedCoin.name);
-    setTargetCoinImage(selectedCoin.image);
-  };
-
-  const handleExchange = () => {
-    if (amount !== null) {
-      exchangeCoins(sourceCoin, targetCoin, amount, targetCoinImage);
-      onClose();
-    }
-  };
+  useEffect(() => {
+    console.log("Source Coin updated: ", sourceCoin);
+  }, [sourceCoin])
+  useEffect(() => {
+    console.log("Target Coin updated: ", targetCoin);
+  }, [targetCoin])
+  useEffect(() => {
+    console.log("Target Coin Image updated: ", targetCoinImage);
+  }, [targetCoinImage])
 
   return (
     <>
-      <Button onClick={handleOpenModal} color="primary">
+      <Button onClick={() => {
+        onOpen();
+        setSourceCoin(coin.name);
+      }} color="primary">
         Exchange
       </Button>
       <Modal
@@ -76,7 +78,10 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                   {coinList.map((coin) => (
                     <SelectItem
                       key={coin.name}
-                      onClick={handleSelectTargetCoin}
+                      onClick={() => {
+                        setTargetCoin(coin.name);
+                        setTargetCoinImage(coin.image);
+                      }}
                       startContent={
                         <Avatar
                           alt={coin.name}
@@ -103,7 +108,10 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                 </Button>
                 <Button
                   color="primary"
-                  onClick={handleExchange}
+                  onClick={() => {
+                    exchangeCoins(sourceCoin, targetCoin, amount, targetCoinImage);
+                    onClose();
+                  }}
                 >
                   Exchange
                 </Button>

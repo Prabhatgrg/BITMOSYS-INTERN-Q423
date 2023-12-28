@@ -56,9 +56,16 @@ export const UserCoinsProvider = ({ children }) => {
   };
 
   const exchangeCoins = async (sourceCoin: string, targetCoin: string, amount: number, image: string) => {
-    const sourceCoinIndex = userCoins.findIndex((coin) => coin.name === targetCoin);
+    //To check if the coin is owned by the user
+    const sourceCoinIndex = userCoins.findIndex((coin) => coin.name === sourceCoin);
     if(sourceCoinIndex !== -1 && amount > 0){
       const sourceCoinAmount = userCoins[sourceCoinIndex].amount;
+
+      //To prevent from exchanging with the same coin
+      if(sourceCoin == targetCoin){
+        alert("Cannot exchange with the same coin");
+        return;
+      }
 
       //To check if user have enough coin
       if(sourceCoinAmount >= amount){
@@ -71,8 +78,28 @@ export const UserCoinsProvider = ({ children }) => {
             ...updatedUserCoins[targetCoinIndex],
             amount: updatedUserCoins[targetCoinIndex].amount + amount,
           };
+        }else{
+          updatedUserCoins.push({name: targetCoin, amount, image });
         }
+
+        //Decrease the amount
+        updatedUserCoins[sourceCoinIndex] = {
+          ...updatedUserCoins[sourceCoinIndex],
+          amount: sourceCoinAmount - amount,
+        };
+
+        //Remove coin if amount is 0
+        if(updatedUserCoins[sourceCoinIndex].amount === 0){
+          updatedUserCoins.splice(sourceCoinIndex, 1);
+        }
+
+        //Updating the userCoin state
+        setUserCoins(updatedUserCoins);
+      }else{
+        alert("Not enought source coin quantity for the exchange");
       }
+    }else{
+      alert("Invalid amount or source coin not found");
     }
 }
 
