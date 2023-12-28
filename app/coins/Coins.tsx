@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface CryptoCoin {
-  id: number;
+  id?: number;
   name: string;
   image: string;
   amount: number;

@@ -26,12 +26,32 @@ interface ExchangeModalProps {
 const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [amount, setAmount] = useState<number | null>(null);
+  const [sourceCoin, setSourceCoin] = useState<string | null>(null);
+  const [targetCoin, setTargetCoin] = useState<string | null>(null);
+  const [targetCoinImage, setTargetCoinImage] = useState<string | null>(null);
   const { userCoins, exchangeCoins } = useUserCoins();
   const coinList: CryptoCoin[] = Coins;
 
+  const handleOpenModal = () => {
+    setSourceCoin(coin.name);
+    onOpen();
+  };
+
+  const handleSelectTargetCoin = (selectedCoin: CryptoCoin) => {
+    setTargetCoin(selectedCoin.name);
+    setTargetCoinImage(selectedCoin.image);
+  };
+
+  const handleExchange = () => {
+    if (amount !== null) {
+      exchangeCoins(sourceCoin, targetCoin, amount, targetCoinImage);
+      onClose();
+    }
+  };
+
   return (
     <>
-      <Button onClick={onOpen} color="primary">
+      <Button onClick={handleOpenModal} color="primary">
         Exchange
       </Button>
       <Modal
@@ -56,6 +76,7 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                   {coinList.map((coin) => (
                     <SelectItem
                       key={coin.name}
+                      onClick={handleSelectTargetCoin}
                       startContent={
                         <Avatar
                           alt={coin.name}
@@ -82,12 +103,7 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                 </Button>
                 <Button
                   color="primary"
-                  onClick={() => {
-                    if (amount !== null) {
-                      // exchangeCoins(coin.name, amount, coin.image);
-                      onClose();
-                    }
-                  }}
+                  onClick={handleExchange}
                 >
                   Exchange
                 </Button>

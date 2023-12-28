@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Coins, { CryptoCoin } from "../coins/Coins";
+import { getImageByName } from "../coins/Coins";
+import { useForceUpdate } from "framer-motion";
 
 interface UserCoinsContextProps {
   userCoins: CryptoCoin[];
@@ -60,19 +62,19 @@ export const UserCoinsProvider = ({ children }) => {
 
       //To check if user have enough coin
       if(sourceCoinAmount >= amount){
-        const updatedUserCoin = [...userCoins];
+        const updatedUserCoins = [...userCoins];
 
         //To Check if targetCoin is already owned
-        const targetCoinIndex = updatedUserCoin.findIndex((coin) => coin.name === targetCoin);
+        const targetCoinIndex = updatedUserCoins.findIndex((coin) => coin.name === targetCoin);
         if(targetCoinIndex !== -1){
-          updatedUserCoin[targetCoinIndex] = {
-            ...updatedUserCoin[targetCoinIndex],
-            amount: updatedUserCoin[targetCoinIndex].amount + amount,
+          updatedUserCoins[targetCoinIndex] = {
+            ...updatedUserCoins[targetCoinIndex],
+            amount: updatedUserCoins[targetCoinIndex].amount + amount,
           };
         }
       }
     }
-  }
+}
 
   const contextValue: UserCoinsContextProps = { userCoins, boughtCoins, exchangeCoins };
 
