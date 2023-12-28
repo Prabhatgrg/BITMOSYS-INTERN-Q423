@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Notiflix from 'notiflix';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import {
   Modal,
   ModalContent,
@@ -61,7 +61,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
                   color="primary"
                   onClick={() => {
                     if (amount === null || amount <= 0) {
-                      Notiflix.Report.failure(
+                      Report.failure(
                         "Error",
                         "Not enought source coin quantity for the exchange",
                         "Close"

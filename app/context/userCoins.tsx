@@ -2,7 +2,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { CryptoCoin } from "../coins/Coins";
-import Notiflix from "notiflix";
+import { Report } from 'notiflix/build/notiflix-report-aio';
+
 
 interface UserCoinsContextProps {
   userCoins: CryptoCoin[];
@@ -60,7 +61,7 @@ export const UserCoinsProvider = ({ children }) => {
         { name, amount, image } as CryptoCoin,
       ]);
     }
-    Notiflix.Report.success("Success", "Coin Bought Successfully", "Close");
+    Report.success("Success", "Coin Bought Successfully", "Close");
   };
 
   const exchangeCoins = async (
@@ -78,12 +79,11 @@ export const UserCoinsProvider = ({ children }) => {
 
       //To prevent from exchanging with the same coin
       if (sourceCoin == targetCoin) {
-        Notiflix.Report.failure(
-          "Error",
+        Report.failure(
           "Cannot exchange with the same coin",
+          "",
           "Close"
         );
-        // alert("Cannot exchange with the same coin");
         return;
       }
 
@@ -109,9 +109,9 @@ export const UserCoinsProvider = ({ children }) => {
           ...updatedUserCoins[sourceCoinIndex],
           amount: sourceCoinAmount - amount,
         };
-        Notiflix.Report.success(
-          "Success",
+        Report.success(
           "Coin Exchange Successfully",
+          "",
           "Close"
         );
 
@@ -123,20 +123,18 @@ export const UserCoinsProvider = ({ children }) => {
         //Updating the userCoin state
         setUserCoins(updatedUserCoins);
       } else {
-        Notiflix.Report.failure(
-          "Error",
+        Report.failure(
           "Not enought source coin quantity for the exchange",
+          "",
           "Close"
         );
-        // alert("Not enought source coin quantity for the exchange");
       }
     } else {
-      Notiflix.Report.failure(
-        "Error",
+      Report.failure(
         "Invalid amount or source coin not found",
+        "",
         "Close"
       );
-      // alert("Invalid amount or source coin not found");
     }
   };
 

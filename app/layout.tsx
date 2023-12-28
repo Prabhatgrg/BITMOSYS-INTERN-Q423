@@ -23,8 +23,6 @@ export default function RootLayout({
           <UserCoinsProvider>{children}</UserCoinsProvider>
         </Providers>
       </body>
-      {/* <link rel="stylesheet" href="dist/notiflix-3.2.6.min.css" />
-      <script src="dist/notiflix-3.2.6.min.js"></script> */}
     </html>
   );
 }

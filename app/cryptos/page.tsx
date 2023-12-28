@@ -1,5 +1,4 @@
 'use client';
-
 import React from "react";
 import Navbar from "../components/Navbar";
 import BuyModal from "../components/BuyModal";
@@ -7,7 +6,6 @@ import Coins, { CryptoCoin } from "../coins/Coins";
 
 const Crypto = () => {
   const cryptoCoins: CryptoCoin[] = Coins;
-  // console.log(cryptoCoins);
   return (
     <>
       <div className="flex flex-col bg-main h-full text-white">
