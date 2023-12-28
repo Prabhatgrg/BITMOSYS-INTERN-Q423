@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -25,35 +25,22 @@ interface ExchangeModalProps {
 
 const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number | null>(null);
   const [sourceCoin, setSourceCoin] = useState<string>("");
   const [targetCoin, setTargetCoin] = useState<string>("");
   const [targetCoinImage, setTargetCoinImage] = useState<string>("");
-  const { userCoins, exchangeCoins } = useUserCoins();
+  const { exchangeCoins } = useUserCoins();
   const coinList: CryptoCoin[] = Coins;
-
-  // useEffect(() => {
-  //   console.log("Source Coin updated: ", sourceCoin);
-  //   console.log("Target Coin updated: ", targetCoin);
-  //   console.log("Target Coin Image updated: ", targetCoinImage);
-  // }, [sourceCoin, targetCoin, targetCoinImage]);
-
-  useEffect(() => {
-    console.log("Source Coin updated: ", sourceCoin);
-  }, [sourceCoin])
-  useEffect(() => {
-    console.log("Target Coin updated: ", targetCoin);
-  }, [targetCoin])
-  useEffect(() => {
-    console.log("Target Coin Image updated: ", targetCoinImage);
-  }, [targetCoinImage])
 
   return (
     <>
-      <Button onClick={() => {
-        onOpen();
-        setSourceCoin(coin.name);
-      }} color="primary">
+      <Button
+        onClick={() => {
+          onOpen();
+          setSourceCoin(coin.name);
+        }}
+        color="primary"
+      >
         Exchange
       </Button>
       <Modal
@@ -95,6 +82,7 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                   ))}
                 </Select>
                 <Input
+                  autoFocus={true}
                   type="number"
                   placeholder="Enter Amount"
                   labelPlacement="outside"
@@ -109,7 +97,12 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({ coin }) => {
                 <Button
                   color="primary"
                   onClick={() => {
-                    exchangeCoins(sourceCoin, targetCoin, amount, targetCoinImage);
+                    exchangeCoins(
+                      sourceCoin,
+                      targetCoin,
+                      amount!,
+                      targetCoinImage
+                    );
                     onClose();
                   }}
                 >

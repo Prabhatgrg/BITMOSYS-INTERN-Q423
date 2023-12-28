@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Notiflix from 'notiflix';
 import {
   Modal,
   ModalContent,
@@ -42,12 +43,14 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
               </ModalHeader>
               <ModalBody>
                 <Input
+                  autoFocus={true}
                   type="number"
                   placeholder="Enter Amount"
                   labelPlacement="outside"
                   className="text-white"
                   value={amount !== null ? amount.toString() : ""}
                   onChange={(e) => setAmount(parseFloat(e.target.value))}
+                  onClick={() => setAmount(null)}
                 />
               </ModalBody>
               <ModalFooter>
@@ -58,7 +61,11 @@ const BuyModal: React.FC<BuyModalProps> = ({ coin }) => {
                   color="primary"
                   onClick={() => {
                     if (amount === null || amount <= 0) {
-                      alert("Error: Amount needs to be greater than 0");
+                      Notiflix.Report.failure(
+                        "Error",
+                        "Not enought source coin quantity for the exchange",
+                        "Close"
+                      );
                     } else {
                       boughtCoins(coin.name, amount, coin.image);
                       onClose();
