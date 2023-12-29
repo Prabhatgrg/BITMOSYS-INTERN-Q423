@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { CryptoCoin } from "../coins/Coins";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
@@ -16,20 +16,30 @@ interface UserCoinsContextProps {
   ) => void;
 }
 
+interface UserCoinsProviderProps {
+  children: ReactNode;
+}
+
 const UserCoinsContext = createContext<UserCoinsContextProps | undefined>(
   undefined
 );
 
-export const UserCoinsProvider = ({ children }) => {
+export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }) => {
   const [userCoins, setUserCoins] = useState<CryptoCoin[]>(() => {
-    //To load the stored user coins
-    const storedCoins = window.localStorage.getItem("userCoins");
 
-    //Used try catch method for error handling
-    try {
-      return storedCoins ? JSON.parse(storedCoins) : [];
-    } catch (error) {
-      console.error("Error parsing stored coins:", error);
+    if(typeof window !== 'undefined'){
+      //To load the stored user coins
+      const storedCoins = window.localStorage.getItem("userCoins");
+  
+      //Used try catch method for error handling
+      try {
+        return storedCoins ? JSON.parse(storedCoins) : [];
+      } catch (error) {
+        console.error("Error parsing stored coins:", error);
+        return [];
+      }
+    }else{
+      // console.error("Window is undefined");
       return [];
     }
   });

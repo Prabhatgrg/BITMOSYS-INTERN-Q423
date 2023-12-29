@@ -6,7 +6,7 @@ import Menu from "../public/menu.png";
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
+  const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
 
@@ -25,7 +25,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="md:hidden">
-          <div onClick={toggleMobileMenu} className="text-white cursor-pointer">
+          <div onClick={toggleMenu} className="text-white cursor-pointer">
             <Image src={Menu} alt="Menu Icon" width={50} height={50} />
           </div>
         </div>
@@ -35,14 +35,14 @@ const Navbar = () => {
           <Link
             href="/"
             className="block text-white py-2 hover:bg-[#1E2026]"
-            onClick={toggleMobileMenu}
+            onClick={toggleMenu}
           >
             Home
           </Link>
           <Link
             href="/cryptos"
             className="block text-white py-2 hover:bg-[#1E2026]"
-            onClick={toggleMobileMenu}
+            onClick={toggleMenu}
           >
             Crypto
           </Link>
