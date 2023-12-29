@@ -1,8 +1,8 @@
 'use client';
 import React from "react";
-import Navbar from "../components/Navbar";
-import BuyModal from "../components/BuyModal";
-import Coins, { CryptoCoin } from "../coins/Coins";
+import Navbar from "@/components/Navbar";
+import BuyModal from "@/components/BuyModal";
+import Coins, { CryptoCoin } from "@/coins/Coins";
 
 const Crypto = () => {
   const cryptoCoins: CryptoCoin[] = Coins;
