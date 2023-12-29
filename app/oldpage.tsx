@@ -11,12 +11,12 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-col bg-main min-h-screen overflow-y-scroll text-white">
+      <div className="flex flex-col bg-main h-screen overflow-y-scroll text-white">
         <Navbar />
 
         <main>
-          <div className="wrapper mt-10 flex justify-center sm:w-5/6 md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto flex-col">
-            <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-10 border-2 border-white px-6 py-3 rounded-xl">
+          <div className="wrapper mt-10 flex justify-center w-3/4 mx-auto flex-col">
+            <div className="container mx-auto flex justify-between items-center gap-10 border-2 border-white px-6 py-3 rounded-xl">
               <div className="cryptoowned flex flex-col items-center">
                 <span className="text-xl font-bold">
                   Number of Crypto Coins Type
@@ -25,7 +25,7 @@ const Page = () => {
                   <li>{userCoins.length}</li>
                 </ul>
               </div>
-              <div className="totalcrypto flex flex-col items-center mt-5 sm:mt-0">
+              <div className="totalcrypto flex flex-col items-center">
                 <span className="text-xl font-bold">
                   Total number of Crypto Coins
                 </span>
@@ -41,14 +41,17 @@ const Page = () => {
                   userCoins.map((coin) => (
                     <div
                       key={coin.id}
-                      className={`${coin.name.toLowerCase()}-wrapper flex flex-col sm:flex-row items-center justify-between gap-4 border-2 border-white rounded-3xl px-6 py-6`}
+                      className={`${coin.name.toLowerCase()}-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6`}
                     >
-                      <div className="crypto-info flex items-center gap-4">
+                      <div
+                        className={`${coin.name.toLowerCase()} flex items-center gap-4`}
+                      >
                         <img
                           src={`${coin.image}`}
                           alt={coin.name}
                           width={25}
-                        />
+                          />
+
                         <span>{coin.name}</span>
                         <span>Owned: {coin.amount}</span>
                       </div>
@@ -56,7 +59,7 @@ const Page = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify center">
                     <h1>You have 0 Coins</h1>
                   </div>
                 )}
