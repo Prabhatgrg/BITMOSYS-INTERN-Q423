@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Navbar from "@/components/Navbar";
-import ExchangeModal from "@/components/ExchangeModal";
-import { useUserCoins } from "@/context/userCoins";
+import Navbar from "@/Components/Navbar";
+import ExchangeModal from "@/Components/ExchangeModal";
+import { useUserCoins } from "@/Context/userCoins";
 
 const Page = () => {
   const { userCoins } = useUserCoins();
