@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { CryptoCoin } from "../Coins/Coins";
+import { CryptoCoin } from "../coins/Coins";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 

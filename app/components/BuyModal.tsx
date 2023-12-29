@@ -10,7 +10,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import { useUserCoins } from "../Context/userCoins";
+import { useUserCoins } from "../context/userCoins";
 
 interface BuyModalProps {
   coin: {

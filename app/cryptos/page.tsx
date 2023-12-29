@@ -3,7 +3,7 @@
 import React from "react";
 import Navbar from "@/Components/Navbar";
 import BuyModal from "@/Components/BuyModal";
-import Coins, { CryptoCoin } from "@/Coins/Coins";
+import Coins, { CryptoCoin } from "@/coins/Coins";
 
 const Crypto = () => {
   const cryptoCoins: CryptoCoin[] = Coins;

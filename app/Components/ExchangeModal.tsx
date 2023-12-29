@@ -12,8 +12,8 @@ import {
   SelectItem,
   Avatar,
 } from "@nextui-org/react";
-import { useUserCoins } from "../Context/userCoins";
-import Coins, { CryptoCoin } from "../Coins/Coins";
+import { useUserCoins } from "../context/userCoins";
+import Coins, { CryptoCoin } from "../coins/Coins";
 
 interface ExchangeModalProps {
   coin: {

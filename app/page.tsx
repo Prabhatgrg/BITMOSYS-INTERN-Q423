@@ -2,7 +2,7 @@
 import React from "react";
 import Navbar from "@/Components/Navbar";
 import ExchangeModal from "@/Components/ExchangeModal";
-import { useUserCoins } from "@/Context/userCoins";
+import { useUserCoins } from "@/context/userCoins";
 
 const Page = () => {
   const { userCoins } = useUserCoins();
