@@ -1,10 +1,17 @@
 ## CryptoHub
 
-## Project Description
+## Project Description:
 
 CryptoHub is a cryptocurrency transaction platform where user is able to buy and exchange cryptocurrencies. It allows them to manage their portfolio get real-time update.
 
-## Run Locally
+## Tech Stack Used:
+- React
+- Nextjs
+- Tailwind CSS
+- Notiflix
+- Next UI
+
+## Clone and Run:
 
 1. Clone the repository:
 
@@ -22,7 +29,7 @@ cd project-directory
 ```bash
 npm install
 ```
-4. Start the app (npm run dev for now)
+4. Start the app
 ```bash
-npm run dev
+npm start
 ```
