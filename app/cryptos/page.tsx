@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 import React from "react";
 import Navbar from "@/components/Navbar";
 import BuyModal from "@/components/BuyModal";
@@ -12,25 +13,26 @@ const Crypto = () => {
         <Navbar />
 
         <main>
-          <div className="wrapper flex justify-center w-2/5 mx-auto flex-col">
+          <div className="wrapper flex justify-center sm:w-3/4 lg:w-4/5 mx-auto flex-col">
             <div className="feed-wrapper mt-10">
-              <h1>Crypto Coins</h1>
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+                Crypto Coins
+              </h1>
               <div className="feeds flex flex-col gap-10 mt-4 mb-4">
                 {cryptoCoins.map((coin) => (
                   <div
                     key={coin.id}
-                    className={`${coin.name.toLowerCase()}-wrapper flex items-center justify-between border-2 border-white rounded-3xl px-6 py-6`}
+                    className={`${coin.name.toLowerCase()}-wrapper flex flex-col md:flex-row items-center justify-between border-2 border-white rounded-3xl p-6`}
                   >
-                    <div
-                      className={`${coin.name.toLowerCase()} flex items-center gap-4`}
-                    >
+                    <div className="flex items-center mb-4 md:mb-0">
                       <img
                         src={`${coin.image}`}
                         alt={coin.name}
-                        width={coin.name === "Ethereum" ? 50 : 60}
-                        height={coin.name === "Ethereum" ? 20 : 60}
+                        className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
                       />
-                      <span>{coin.name}</span>
+                      <span className="ml-2 text-base md:text-lg lg:text-xl">
+                        {coin.name}
+                      </span>
                     </div>
                     <BuyModal coin={coin} />
                   </div>
@@ -40,8 +42,8 @@ const Crypto = () => {
           </div>
         </main>
 
-        <footer className="w-full mt-auto flex justify-center">
-          <span>&#169; copyright</span>
+        <footer className="w-full mt-auto flex justify-center py-4">
+          <span className="text-sm">&copy; Copyright</span>
         </footer>
       </div>
     </>
