@@ -56,6 +56,11 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
   const boughtCoins = async (name: string, amount: number, image: string) => {
     //Check if the coin with the given name is already in userCoins
     const coinExists = userCoins.find((coin) => coin.name === name);
+    const buyLimit = 1000;
+    if(amount > buyLimit){
+      Report.failure(`Cannot buy more than ${buyLimit} ${name}`, "", "Close");
+      return;
+    }
 
     if (coinExists) {
       //If the coin already exists, then only update the amount
@@ -71,7 +76,7 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
         { name, amount, image } as CryptoCoin,
       ]);
     }
-    Report.success("Success", "Coin Bought Successfully", "Close");
+    Report.success("Coin Bought Successfully", "", "Close");
   };
 
   const exchangeCoins = async (
@@ -84,6 +89,7 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
     const sourceCoinIndex = userCoins.findIndex(
       (coin) => coin.name === sourceCoin
     );
+    
     if (sourceCoinIndex !== -1 && amount > 0) {
       const sourceCoinAmount = userCoins[sourceCoinIndex].amount;
 
@@ -134,7 +140,7 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
         setUserCoins(updatedUserCoins);
       } else {
         Report.failure(
-          "Not enought source coin quantity for the exchange",
+          "Not enough coin for exchange",
           "",
           "Close"
         );
