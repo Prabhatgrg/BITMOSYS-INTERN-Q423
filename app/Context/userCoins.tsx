@@ -91,6 +91,10 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({
     amount: number,
     image: string
   ) => {
+    if (!targetCoin) {
+      Report.failure("Select Coin for exchange", "", "Close");
+      return;
+    }
     //To check if the coin is owned by the user
     const sourceCoinIndex = userCoins.findIndex(
       (coin) => coin.name === sourceCoin
