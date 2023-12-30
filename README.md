@@ -29,7 +29,14 @@ cd project-directory
 ```bash
 npm install
 ```
-4. Start the app
+
+4. Build the project
+
+```bash
+npm run build
+```
+
+5. Start the app
 ```bash
 npm start
 ```
