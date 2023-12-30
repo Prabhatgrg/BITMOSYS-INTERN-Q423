@@ -64,7 +64,7 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({
     const coinExists = userCoins.find((coin) => coin.name === name);
     const buyLimit = 1000;
     if (amount > buyLimit) {
-      Report.failure(`Cannot buy more than ${buyLimit} ${name}`, "", "Close");
+      Report.failure(`Cannot buy more than ${buyLimit}`, "", "Close");
       return;
     }
 
