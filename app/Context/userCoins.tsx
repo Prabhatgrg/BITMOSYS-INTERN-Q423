@@ -1,9 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { CryptoCoin } from "../coins/Coins";
-import { Report } from 'notiflix/build/notiflix-report-aio';
-
+import { Report } from "notiflix/build/notiflix-report-aio";
 
 interface UserCoinsContextProps {
   userCoins: CryptoCoin[];
@@ -24,13 +29,14 @@ const UserCoinsContext = createContext<UserCoinsContextProps | undefined>(
   undefined
 );
 
-export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }) => {
+export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({
+  children,
+}) => {
   const [userCoins, setUserCoins] = useState<CryptoCoin[]>(() => {
-
-    if(typeof window !== 'undefined'){
+    if (typeof window !== "undefined") {
       //To load the stored user coins
       const storedCoins = window.localStorage.getItem("userCoins");
-  
+
       //Used try catch method for error handling
       try {
         return storedCoins ? JSON.parse(storedCoins) : [];
@@ -38,7 +44,7 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
         console.error("Error parsing stored coins:", error);
         return [];
       }
-    }else{
+    } else {
       // console.error("Window is undefined");
       return [];
     }
@@ -57,7 +63,7 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
     //Check if the coin with the given name is already in userCoins
     const coinExists = userCoins.find((coin) => coin.name === name);
     const buyLimit = 1000;
-    if(amount > buyLimit){
+    if (amount > buyLimit) {
       Report.failure(`Cannot buy more than ${buyLimit} ${name}`, "", "Close");
       return;
     }
@@ -89,17 +95,13 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
     const sourceCoinIndex = userCoins.findIndex(
       (coin) => coin.name === sourceCoin
     );
-    
+
     if (sourceCoinIndex !== -1 && amount > 0) {
       const sourceCoinAmount = userCoins[sourceCoinIndex].amount;
 
       //To prevent from exchanging with the same coin
       if (sourceCoin == targetCoin) {
-        Report.failure(
-          "Cannot exchange with the same coin",
-          "",
-          "Close"
-        );
+        Report.failure("Cannot exchange with the same coin", "", "Close");
         return;
       }
 
@@ -125,11 +127,7 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
           ...updatedUserCoins[sourceCoinIndex],
           amount: sourceCoinAmount - amount,
         };
-        Report.success(
-          "Coin Exchange Successfully",
-          "",
-          "Close"
-        );
+        Report.success("Coin Exchange Successfully", "", "Close");
 
         //Remove coin if amount is 0
         if (updatedUserCoins[sourceCoinIndex].amount === 0) {
@@ -139,18 +137,10 @@ export const UserCoinsProvider: React.FC<UserCoinsProviderProps> = ({ children }
         //Updating the userCoin state
         setUserCoins(updatedUserCoins);
       } else {
-        Report.failure(
-          "Not enough coin for exchange",
-          "",
-          "Close"
-        );
+        Report.failure("Not enough coin", "", "Close");
       }
     } else {
-      Report.failure(
-        "Invalid amount or source coin not found",
-        "",
-        "Close"
-      );
+      Report.failure("Invalid amount or source coin not found", "", "Close");
     }
   };
 
